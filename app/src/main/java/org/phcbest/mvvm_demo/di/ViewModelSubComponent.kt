@@ -2,7 +2,11 @@ package org.phcbest.mvvm_demo.di
 
 import dagger.Subcomponent
 import org.phcbest.mvvm_demo.viewmodel.ProjectListViewModel
+import org.phcbest.mvvm_demo.viewmodel.ProjectViewModel
 
+/**
+ * 子组件
+ */
 @Subcomponent
 interface ViewModelSubComponent {
 
@@ -12,5 +16,5 @@ interface ViewModelSubComponent {
     }
 
     fun projectListViewModel(): ProjectListViewModel
-//  todo   fun projectViewModel(): ProjectViewModel
+    fun projectViewModel(): ProjectViewModel
 }
