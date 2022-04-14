@@ -11,6 +11,9 @@ import java.util.concurrent.Callable
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * 项目viewmodel工厂
+ */
 @Suppress("UNCHECKED_CAST")
 @Singleton
 class ProjectViewModelFactory : ViewModelProvider.Factory {
@@ -21,9 +24,10 @@ class ProjectViewModelFactory : ViewModelProvider.Factory {
     @Inject
     constructor(viewModelSubComponent: ViewModelSubComponent) {
         creators = ArrayMap()
-        creators[ProjectViewModel::class.java] =
+        // TODO: 2022/4/14 这里参数存疑 是::class 还是::class.java
+        creators[ProjectViewModel::class] =
             Callable<ViewModel> { viewModelSubComponent.projectViewModel() }
-        creators[ProjectListViewModel::class.java] =
+        creators[ProjectListViewModel::class] =
             Callable<ViewModel> { viewModelSubComponent.projectListViewModel() }
     }
 
@@ -31,7 +35,8 @@ class ProjectViewModelFactory : ViewModelProvider.Factory {
         var creator = creators[modelClass]
         if (creator == null) {
             for (entry in creators.entries) {
-                modelClass.isAssignableFrom(entry.key.javaClass)
+                // TODO: 2022/4/14 这里强转存疑
+                modelClass.isAssignableFrom(entry.key as Class<*>)
                 creator = entry.value
                 break
             }

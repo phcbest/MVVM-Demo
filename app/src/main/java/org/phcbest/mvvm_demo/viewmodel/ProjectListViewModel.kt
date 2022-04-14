@@ -10,7 +10,7 @@ import javax.inject.Inject
 class ProjectListViewModel : AndroidViewModel {
 
     //UI可以直接观测该参数
-    lateinit var projectListObservable: LiveData<List<Project>>
+    private lateinit var projectListObservable: LiveData<List<Project>>
 
     /**
      * 将网络请求的类
@@ -21,6 +21,11 @@ class ProjectListViewModel : AndroidViewModel {
         application: Application
     ) : super(application) {
         this.projectListObservable = projectRepository.getProjectList("Google")
+    }
+
+    //UI可以直接观测该参数
+    fun getProjectListObservable(): LiveData<List<Project>> {
+        return projectListObservable
     }
 
 }

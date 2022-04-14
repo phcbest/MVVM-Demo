@@ -1,6 +1,7 @@
 package org.phcbest.mvvm_demo.di
 
 import androidx.lifecycle.ViewModelProvider
+import dagger.Module
 import dagger.Provides
 import org.phcbest.mvvm_demo.service.respository.GitHubService
 import org.phcbest.mvvm_demo.viewmodel.ProjectViewModelFactory
@@ -8,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+@Module(subcomponents = [ViewModelSubComponent::class])
 class AppModule {
 
     /**
@@ -28,8 +30,7 @@ class AppModule {
     @Singleton
     @Provides
     fun provideViewModelFactory(viewModelSubComponent: ViewModelSubComponent.Builder): ViewModelProvider.Factory {
-        TODO()
-//        return ProjectViewModelFactory()
+        return ProjectViewModelFactory(viewModelSubComponent.build())
     }
 
 }

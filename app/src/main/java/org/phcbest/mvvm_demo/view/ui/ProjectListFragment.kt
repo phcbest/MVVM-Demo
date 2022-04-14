@@ -7,16 +7,22 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import org.phcbest.mvvm_demo.R
 import org.phcbest.mvvm_demo.databinding.FragmentProjectListBinding
+import org.phcbest.mvvm_demo.di.Injectable
 import org.phcbest.mvvm_demo.service.model.Project
 import org.phcbest.mvvm_demo.view.adapter.ProjectAdapter
 import org.phcbest.mvvm_demo.view.callback.ProjectClickCallback
+import org.phcbest.mvvm_demo.viewmodel.ProjectListViewModel
 import javax.inject.Inject
 
-class ProjectListFragment : Fragment() {
+/**
+ * 实现了Injectable,设置为可注入的
+ */
+class ProjectListFragment : Fragment(), Injectable {
 
     private lateinit var binding: FragmentProjectListBinding
     private lateinit var projectAdapter: ProjectAdapter
@@ -53,7 +59,31 @@ class ProjectListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        ViewModelProviders.of(this)
+        //使用ViewModel提供者提供个ViewModel对象
+        val viewModel =
+            ViewModelProviders.of(
+                this,
+                viewModelProvider
+            )[ProjectListViewModel::class.java]//todo 依赖注入不生效？
+        //kotlin.UninitializedPropertyAccessException: lateinit property viewModelProvider has not been initialized
+
+        observeViewModel(viewModel)
+    }
+
+    /**
+     * 观测ViewModel
+     */
+    private fun observeViewModel(viewModel: ProjectListViewModel) {
+        //当观测到这个数据发生改变时，执行以下操作
+        viewModel.getProjectListObservable()
+            .observe(this.viewLifecycleOwner, object : Observer<List<Project>> {
+                override fun onChanged(t: List<Project>?) {
+                    if (t != null) {
+                        binding.isLoading = false
+                        projectAdapter.setProjectListParam(t)
+                    }
+                }
+            })
     }
 
 
