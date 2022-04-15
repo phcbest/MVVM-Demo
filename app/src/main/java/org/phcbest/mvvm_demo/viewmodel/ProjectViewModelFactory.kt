@@ -18,16 +18,15 @@ import javax.inject.Singleton
 @Singleton
 class ProjectViewModelFactory : ViewModelProvider.Factory {
 
-    lateinit var creators: ArrayMap<Any, Callable<ViewModel>>
+    lateinit var creators: ArrayMap<Class<*>, Callable<ViewModel>>
 
 
     @Inject
     constructor(viewModelSubComponent: ViewModelSubComponent) {
         creators = ArrayMap()
-        // TODO: 2022/4/14 这里参数存疑 是::class 还是::class.java
-        creators[ProjectViewModel::class] =
+        creators[ProjectViewModel::class.java] =
             Callable<ViewModel> { viewModelSubComponent.projectViewModel() }
-        creators[ProjectListViewModel::class] =
+        creators[ProjectListViewModel::class.java] =
             Callable<ViewModel> { viewModelSubComponent.projectListViewModel() }
     }
 
@@ -35,10 +34,10 @@ class ProjectViewModelFactory : ViewModelProvider.Factory {
         var creator = creators[modelClass]
         if (creator == null) {
             for (entry in creators.entries) {
-                // TODO: 2022/4/14 这里强转存疑
-                modelClass.isAssignableFrom(entry.key as Class<*>)
-                creator = entry.value
-                break
+                if (modelClass.isAssignableFrom(entry.key)) {
+                    creator = entry.value
+                    break
+                }
             }
         }
         if (creator == null) {
