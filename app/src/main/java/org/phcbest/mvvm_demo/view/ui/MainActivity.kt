@@ -2,10 +2,17 @@ package org.phcbest.mvvm_demo.view.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import org.phcbest.mvvm_demo.R
 import org.phcbest.mvvm_demo.service.model.Project
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasAndroidInjector {
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,4 +34,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().addToBackStack("project")
             .replace(R.id.fragment_container, projectFragment, null).commit()
     }
+
+    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 }
