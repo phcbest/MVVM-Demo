@@ -2,11 +2,13 @@ package org.phcbest.mvvm_demo
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import dagger.Component
 
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.junit.Assert.*
+import javax.inject.Inject
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -21,4 +23,6 @@ class ExampleInstrumentedTest {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("org.phcbest.mvvm_demo", appContext.packageName)
     }
+
+
 }

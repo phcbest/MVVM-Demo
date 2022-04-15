@@ -63,9 +63,8 @@ class ProjectListFragment : Fragment(), Injectable {
         val viewModel =
             ViewModelProviders.of(
                 this,
-                viewModelProvider
-            )[ProjectListViewModel::class.java]//todo 依赖注入不生效？
-        //kotlin.UninitializedPropertyAccessException: lateinit property viewModelProvider has not been initialized
+                viewModelProvider //todo viewModelProvider 依赖注入不生效？
+            )[ProjectListViewModel::class.java]
 
         observeViewModel(viewModel)
     }
