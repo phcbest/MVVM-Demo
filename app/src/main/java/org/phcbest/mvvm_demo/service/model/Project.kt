@@ -37,4 +37,9 @@ class Project {
     fun Project(name: String?) {
         this.name = name
     }
+
+    override fun toString(): String {
+        return "Project(id=$id, name=$name, full_name=$full_name, owner=$owner, html_url=$html_url, description=$description, url=$url, created_at=$created_at, updated_at=$updated_at, pushed_at=$pushed_at, git_url=$git_url, ssh_url=$ssh_url, clone_url=$clone_url, svn_url=$svn_url, homepage=$homepage, stargazers_count=$stargazers_count, watchers_count=$watchers_count, language=$language, has_issues=$has_issues, has_downloads=$has_downloads, has_wiki=$has_wiki, has_pages=$has_pages, forks_count=$forks_count, open_issues_count=$open_issues_count, forks=$forks, open_issues=$open_issues, watchers=$watchers, default_branch=$default_branch)"
+    }
+
 }

@@ -48,6 +48,9 @@ class ProjectListFragment : Fragment(), Injectable {
         return binding.root
     }
 
+    /**
+     * adapter item 的点击事件
+     */
     private var projectClickCallback = object : ProjectClickCallback {
         override fun onClick(project: Project) {
             // 切换为项目Fragment
@@ -63,7 +66,7 @@ class ProjectListFragment : Fragment(), Injectable {
         val viewModel =
             ViewModelProviders.of(
                 this,
-                viewModelProvider //todo viewModelProvider 依赖注入不生效？
+                viewModelProvider
             )[ProjectListViewModel::class.java]
 
         observeViewModel(viewModel)

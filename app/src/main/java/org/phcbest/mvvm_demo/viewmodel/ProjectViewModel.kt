@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import org.phcbest.mvvm_demo.R
 import org.phcbest.mvvm_demo.service.model.Project
 import org.phcbest.mvvm_demo.service.respository.ProjectRepository
 import javax.inject.Inject
@@ -42,7 +43,10 @@ class ProjectViewModel : AndroidViewModel {
                         return ABSENT
                     }
                     Log.i(TAG, "apply: ProjectViewModel projectid is${projectID.value}")
-                    return projectRepository.getProjectDetails("Google", projectID.value!!)
+                    return projectRepository.getProjectDetails(
+                        application.getString(R.string.userid),
+                        projectID.value!!
+                    )
                 }
             })
     }

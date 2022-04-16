@@ -3,6 +3,7 @@ package org.phcbest.mvvm_demo.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import org.phcbest.mvvm_demo.R
 import org.phcbest.mvvm_demo.service.model.Project
 import org.phcbest.mvvm_demo.service.respository.ProjectRepository
 import javax.inject.Inject
@@ -13,14 +14,14 @@ class ProjectListViewModel : AndroidViewModel {
     private lateinit var projectListObservable: LiveData<List<Project>>
 
     /**
-     * 将网络请求的类
+     * 在构造的时候进行了网络请求,获得list
      */
     @Inject
     constructor(
         projectRepository: ProjectRepository,
         application: Application
     ) : super(application) {
-        this.projectListObservable = projectRepository.getProjectList("Google")
+        this.projectListObservable = projectRepository.getProjectList(application.getString(R.string.userid))
     }
 
     //UI可以直接观测该参数

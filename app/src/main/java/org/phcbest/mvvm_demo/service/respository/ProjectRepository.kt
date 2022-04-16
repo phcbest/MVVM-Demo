@@ -38,7 +38,7 @@ class ProjectRepository {
                 call: Call<List<Project>>?,
                 response: Response<List<Project>>?
             ) {
-                Log.i(TAG, "onResponse: 获得项目列表${response?.body()} ")
+                Log.i(TAG, "onResponse: 获得项目列表${response?.body().toString()} ")
                 data.value = response?.body()
             }
 
