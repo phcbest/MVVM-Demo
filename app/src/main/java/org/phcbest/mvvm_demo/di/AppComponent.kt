@@ -3,7 +3,6 @@ package org.phcbest.mvvm_demo.di
 import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjection
 import dagger.android.AndroidInjectionModule
 import org.phcbest.mvvm_demo.MVVMApplication
 import javax.inject.Singleton

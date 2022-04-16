@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
      * 切换为显示详情的Fragment
      */
     fun show(project: Project) {
+        //实例化Fragment的时候将project的name传递进去
         val projectFragment = ProjectFragment.forProject(project.name)
         supportFragmentManager.beginTransaction().addToBackStack("project")
             .replace(R.id.fragment_container, projectFragment, null).commit()

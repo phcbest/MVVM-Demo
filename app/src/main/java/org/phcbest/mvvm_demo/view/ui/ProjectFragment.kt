@@ -46,6 +46,7 @@ class ProjectFragment : Fragment(), Injectable {
         val viewModel =
             ViewModelProviders.of(this, viewModelFactory).get(ProjectViewModel::class.java)
         Log.i(TAG, "onActivityCreated  ProjectID: ${arguments?.getString(KEY_PROJECT_ID)!!}")
+        //获得project name
         viewModel.setProjectID(arguments?.getString(KEY_PROJECT_ID)!!)
         binding.projectViewModel = viewModel
         binding.isLoading = true

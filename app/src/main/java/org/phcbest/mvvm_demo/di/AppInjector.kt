@@ -7,10 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
-import dagger.android.support.DaggerAppCompatActivity
 import org.phcbest.mvvm_demo.MVVMApplication
 
 /**
@@ -56,7 +54,7 @@ class AppInjector {
                 //实现注入
                 AndroidInjection.inject(activity)
             }
-            //如果是fragment的实现
+            //如果是Activity的实现
             if (activity is FragmentActivity) {
                 //设置fragment的生命周期监听
                 activity.supportFragmentManager.registerFragmentLifecycleCallbacks(object :

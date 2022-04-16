@@ -1,8 +1,6 @@
 package org.phcbest.mvvm_demo
 
-import android.app.Activity
 import android.app.Application
-import android.util.Log
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -22,12 +20,9 @@ class MVVMApplication : Application(), HasAndroidInjector {
     override fun onCreate() {
         super.onCreate()
         AppInjector.init(this)
-
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
         return dispatchingAndroidInjector
     }
-
-
 }
